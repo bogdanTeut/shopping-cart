@@ -1,10 +1,18 @@
 package shopping
 
-class ShoppingCart(productTypes: List[ProductType]) {
+class ShoppingCart(productTypes: List[ProductType], offers: List[Offer]) {
 
-  def checkout(products: List[String]): Double = {
-    def calculatePrice(productType: ProductType): Double = {
-      products.count(_ == productType.name) * productType.price
+  def checkout(products: List[String]): BigDecimal = {
+    def numberOfProductsAfterApplyingOffer(name: String, numberOfProducts: Int): Int = {
+      offers
+        .find(_.name == name)
+        .map(offer => numberOfProducts / offer.from * offer.to + numberOfProducts % offer.from)
+        .getOrElse(numberOfProducts)
+    }
+
+    def calculatePrice(productType: ProductType): BigDecimal = {
+      val numberOfProducts = numberOfProductsAfterApplyingOffer(productType.name, products.count(_ == productType.name))
+      productType.price.*(numberOfProducts)
     }
 
     products match {
@@ -14,4 +22,5 @@ class ShoppingCart(productTypes: List[ProductType]) {
   }
 }
 
-class ProductType(val name: String, val price: Double)
+class ProductType(val name: String, val price: BigDecimal)
+class Offer(val name: String, val from: Int, val to: Int)
