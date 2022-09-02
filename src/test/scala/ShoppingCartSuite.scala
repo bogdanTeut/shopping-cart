@@ -1,3 +1,4 @@
+import ShoppingCart.checkout
 import org.scalatest.funsuite.AnyFunSuite
 
 class ShoppingCartSuite extends AnyFunSuite {
