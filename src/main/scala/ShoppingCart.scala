@@ -8,7 +8,10 @@ object ShoppingCart {
       products.count(p) * productPrice
     }
 
-    calculatePrice(0.6, isApple) + calculatePrice(0.25, isOrange)
+    products match {
+      case null => throw new IllegalArgumentException("No null values accepted!")
+      case _ => calculatePrice(0.6, isApple) + calculatePrice(0.25, isOrange)
+    }
   }
 
 }
