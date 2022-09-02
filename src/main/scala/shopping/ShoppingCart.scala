@@ -12,7 +12,7 @@ class ShoppingCart(productTypes: List[ProductType], offers: List[Offer]) {
 
     def calculatePrice(productType: ProductType): BigDecimal = {
       val numberOfProducts = numberOfProductsAfterApplyingOffer(productType.name, products.count(_ == productType.name))
-      productType.price.*(numberOfProducts)
+      productType.price * numberOfProducts
     }
 
     products match {

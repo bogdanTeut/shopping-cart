@@ -48,4 +48,15 @@ class ShoppingCartSuite extends AnyFunSuite {
     assert( shoppingCart.checkout(List("Apple", "Apple", "Apple", "Apple", "Apple", "Apple", "Apple", "Apple")) === 3.6)
   }
 
+  test("checkout eight apples and three oranges with offers") {
+    val offers = List(
+      new Offer("Apple", 3, 2),
+      new Offer("Orange", 2, 1)
+    )
+
+    val shoppingCart = new ShoppingCart(productTypes, offers)
+
+    assert( shoppingCart.checkout(List("Apple", "Apple", "Orange", "Apple", "Orange", "Apple", "Apple", "Apple", "Apple", "Apple", "Orange")) === 4.1)
+  }
+
 }
