@@ -1,15 +1,14 @@
 object ShoppingCart {
 
   def checkout(products: List[String]): Double = {
-    def calculateApplesPrice = {
-      products.count(_ == "Apple") * 0.6
+    val isApple: String => Boolean = _ == "Apple"
+    val isOrange: String => Boolean = _ == "Orange"
+
+    def calculatePrice(productPrice: Double, p: String => Boolean): Double = {
+      products.count(p) * productPrice
     }
 
-    def calculateOrangePrice = {
-      products.count(_ == "Orange") * 0.25
-    }
-
-    calculateApplesPrice + calculateOrangePrice
+    calculatePrice(0.6, isApple) + calculatePrice(0.25, isOrange)
   }
 
 }
