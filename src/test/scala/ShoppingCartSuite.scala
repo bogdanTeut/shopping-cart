@@ -11,4 +11,8 @@ class ShoppingCartSuite extends AnyFunSuite {
     assert( checkout(List("Apple", "Apple")) === 1.2)
   }
 
+  test("checkout two oranges") {
+    assert( checkout(List("Orange", "Orange")) === 0.5)
+  }
+
 }
